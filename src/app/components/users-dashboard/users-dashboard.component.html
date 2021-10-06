@@ -1,0 +1,62 @@
+<nav class="navbar navbar-light bg-primary">
+  <div class="container">
+    <h1 class="title">DBS CRUD APP</h1>
+    <div class="d-flex">
+      <button (click)="onClickAdd()" class="btn add-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Add user</button>
+    </div>
+  </div>
+</nav>
+<main class="container col-md-12">
+  <div class="users-list">
+      <div class="card" *ngFor="let user of usertData" style="width: 22rem;">
+        <div class="card-body">
+          <a (click)="onEdit(user)" class="card-title" data-bs-toggle="modal" data-bs-target="#exampleModal">Name: {{user.name}}</a>
+          <p class="card-text">Email: {{user.email}}</p>
+          <p class="card-text">Phone: {{user.phone}}</p>
+          <p class="card-text">Website: {{user.email}}</p>
+          <button (click)="onEdit(user)" class="btn btn-primary edit" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
+          <button (click)="deleteUser(user)" class="btn card-btn">Delete</button>
+        </div>
+      </div>
+  </div>
+</main>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">User detail</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formValue">
+          <div class="mb-3">
+            <label for="exampleInputName" class="form-label">Name</label>
+            <input type="text" formControlName="name" class="form-control" id="exampleInputName" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input type="email" formControlName="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPhone" class="form-label">Phone</label>
+            <input type="text" formControlName="phone" class="form-control" id="exampleInputPhone">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputWebsite" class="form-label">Website</label>
+            <input type="text" formControlName="website" class="form-control" id="exampleInputWebsite">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" *ngIf="showAdd" (click)='postUserDetails()' class="btn btn-primary">Add</button>
+        <button type="button" *ngIf="showUpdate" (click)='updateUserDetails()' class="btn btn-primary">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
